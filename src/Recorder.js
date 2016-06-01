@@ -30,7 +30,7 @@ const Recorder = React.createClass({
     if (navigator.getUserMedia && MediaRecorder) {
       const constraints = {audio: true}
       this.chunks = []
-      const { blobOpts, onStop, onError, mediaOpts, onPause, onResume, onStart } = this.props
+      const { blobOpts, onStop, onError, mediaOpts, onPause, onResume, onStart, gotStream } = this.props
 
       const onErr = err => {
         console.warn(err)
@@ -54,6 +54,7 @@ const Recorder = React.createClass({
         if (onPause) this.mediaRecorder.onpause = onPause
         if (onResume) this.mediaRecorder.onresume = onResume
         if (onStart) this.mediaRecorder.onstart = onStart
+        if (gotStream) gotStream(stream)
       }
 
       navigator.getUserMedia(constraints, onSuccess, onErr)
@@ -86,6 +87,7 @@ const Recorder = React.createClass({
     onPause: PropTypes.func,
     onStart: PropTypes.func,
     onResume: PropTypes.func,
+    gotStream: PropTypes.func,
     blobOpts: PropTypes.object,
     mediaOpts: PropTypes.object
   }
