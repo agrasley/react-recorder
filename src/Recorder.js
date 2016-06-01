@@ -5,6 +5,22 @@ import React, { PropTypes } from 'react'
 const { MediaRecorder, Blob, alert } = window
 
 const Recorder = React.createClass({
+  start () {
+    this.mediaRecorder.start()
+  },
+
+  stop () {
+    this.mediaRecorder.stop()
+  },
+
+  pause () {
+    this.mediaRecorder.pause()
+  },
+
+  resume () {
+    this.mediaRecorder.resume()
+  },
+
   componentDidMount () {
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.mozGetUserMedia ||
@@ -53,8 +69,8 @@ const Recorder = React.createClass({
   },
 
   componentDidUpdate (prevProps) {
-    if (this.props.command !== 'none' && this.prevProps.command !== this.props.command) {
-      this.mediaRecorder[this.props.command]()
+    if (this.props.command && this.props.command !== 'none' && this.prevProps.command !== this.props.command) {
+      this[this.props.command]()
     }
   },
 
@@ -63,7 +79,7 @@ const Recorder = React.createClass({
   },
 
   propTypes: {
-    command: PropTypes.oneOf(['start', 'stop', 'pause', 'resume', 'none']).isRequired,
+    command: PropTypes.oneOf(['start', 'stop', 'pause', 'resume', 'none']),
     onStop: PropTypes.func.isRequired,
     onMissingAPIs: PropTypes.func,
     onError: PropTypes.func,
