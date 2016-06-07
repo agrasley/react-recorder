@@ -70,7 +70,7 @@ const Recorder = React.createClass({
   },
 
   componentDidUpdate (prevProps) {
-    if (this.props.command && this.props.command !== 'none' && this.prevProps.command !== this.props.command) {
+    if (this.props.command && this.props.command !== 'none' && prevProps.command !== this.props.command) {
       this[this.props.command]()
     }
   },
