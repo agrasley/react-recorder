@@ -76,7 +76,7 @@ const Recorder = React.createClass({
   },
 
   componentWillUnmount () {
-    if (this.onUnmount) this.onUnmount()
+    if (this.props.onUnmount) this.props.onUnmount()
   },
 
   render () {
