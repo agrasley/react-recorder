@@ -75,6 +75,10 @@ const Recorder = React.createClass({
     }
   },
 
+  componentWillUnmount () {
+    if (this.onUnmount) this.onUnmount()
+  },
+
   render () {
     return false
   },
@@ -87,6 +91,7 @@ const Recorder = React.createClass({
     onPause: PropTypes.func,
     onStart: PropTypes.func,
     onResume: PropTypes.func,
+    onUnmount: PropTypes.func,
     gotStream: PropTypes.func,
     blobOpts: PropTypes.object,
     mediaOpts: PropTypes.object
