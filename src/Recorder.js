@@ -52,6 +52,7 @@ const Recorder = React.createClass({
         if (onPause) this.mediaRecorder.onpause = onPause
         if (onResume) this.mediaRecorder.onresume = onResume
         if (onStart) this.mediaRecorder.onstart = onStart
+        this.stream = stream
         if (gotStream) gotStream(stream)
       }
 
@@ -74,7 +75,7 @@ const Recorder = React.createClass({
   },
 
   componentWillUnmount () {
-    if (this.props.onUnmount) this.props.onUnmount()
+    if (this.props.onUnmount) this.props.onUnmount(this.stream)
   },
 
   render () {
