@@ -75,6 +75,10 @@ The options passed to the `Blob` constructor, including specifying the MIMEType 
 
 The options passed to the `MediaRecorder` constructor. Defaults to `{}`.
 
+### constraints
+
+The constraints passed to `navigator.getUserMedia`. Defaults to `{audio: true}`.
+
 ### command
 
 Useful for Redux-like environments where changes in state are communicated via props. When the `command` prop is changed, the corresponding method is called. Allowed values are the method name strings (`['start', 'stop', 'resume', 'pause']`) as well as `'none'`, representing no method call. Developers can also call these methods directly by accessing the component's `ref`.
