@@ -26,9 +26,8 @@ const Recorder = React.createClass({
                               navigator.webkitGetUserMedia)
 
     if (navigator.getUserMedia && window.MediaRecorder) {
-      const constraints = {audio: true}
       this.chunks = []
-      const { blobOpts, onStop, onError, mediaOpts, onPause, onResume, onStart, gotStream } = this.props
+      const { constraints, blobOpts, onStop, onError, mediaOpts, onPause, onResume, onStart, gotStream } = this.props
 
       const onErr = err => {
         console.warn(err)
@@ -56,7 +55,7 @@ const Recorder = React.createClass({
         if (gotStream) gotStream(stream)
       }
 
-      navigator.getUserMedia(constraints, onSuccess, onErr)
+      navigator.getUserMedia(constraints || {audio: true}, onSuccess, onErr)
     } else {
       console.warn('Audio recording APIs not supported by this browser')
       const { onMissingAPIs } = this.props
@@ -93,7 +92,8 @@ const Recorder = React.createClass({
     onUnmount: PropTypes.func,
     gotStream: PropTypes.func,
     blobOpts: PropTypes.object,
-    mediaOpts: PropTypes.object
+    mediaOpts: PropTypes.object,
+    constraints: PropTypes.object
   }
 })
 
