@@ -1,24 +1,24 @@
 'use strict'
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Recorder = React.createClass({
+class Recorder extends Component {
   start () {
     this.mediaRecorder.start()
-  },
+  }
 
   stop () {
     this.mediaRecorder.stop()
-  },
+  }
 
   pause () {
     this.mediaRecorder.pause()
-  },
+  }
 
   resume () {
     this.mediaRecorder.resume()
-  },
+  }
 
   componentDidMount () {
     navigator.getUserMedia = (navigator.getUserMedia ||
@@ -67,40 +67,40 @@ const Recorder = React.createClass({
         window.alert('Your browser doesn\'t support native microphone recording. For best results, we recommend using Google Chrome or Mozilla Firefox to use this site.')
       }
     }
-  },
+  }
 
   componentDidUpdate (prevProps) {
     if (this.props.command && this.props.command !== 'none' && prevProps.command !== this.props.command) {
       this[this.props.command]()
     }
-  },
+  }
 
   componentWillUnmount () {
     if (this.props.onUnmount) this.props.onUnmount(this.stream)
-  },
+  }
 
   render () {
-    return false
-  },
-
-  propTypes: {
-    command: PropTypes.oneOf(['start', 'stop', 'pause', 'resume', 'none']),
-    onStop: PropTypes.func.isRequired,
-    onMissingAPIs: PropTypes.func,
-    onError: PropTypes.func,
-    onPause: PropTypes.func,
-    onStart: PropTypes.func,
-    onResume: PropTypes.func,
-    onUnmount: PropTypes.func,
-    gotStream: PropTypes.func,
-    blobOpts: PropTypes.object,
-    mediaOpts: PropTypes.object,
-    constraints: PropTypes.object
-  },
-
-  defaultProps: {
-    constraints: {audio: true}
+    return false;
   }
-})
+}
+
+Recorder.propTypes = {
+  command: PropTypes.oneOf(['start', 'stop', 'pause', 'resume', 'none']),
+  onStop: PropTypes.func.isRequired,
+  onMissingAPIs: PropTypes.func,
+  onError: PropTypes.func,
+  onPause: PropTypes.func,
+  onStart: PropTypes.func,
+  onResume: PropTypes.func,
+  onUnmount: PropTypes.func,
+  gotStream: PropTypes.func,
+  blobOpts: PropTypes.object,
+  mediaOpts: PropTypes.object,
+  constraints: PropTypes.object
+}
+
+Recorder.defaultProps = {
+  constraints: {audio: true}
+}
 
 export default Recorder
