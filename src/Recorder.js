@@ -1,6 +1,7 @@
 'use strict'
 
-import React, { PropTypes } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Recorder = React.createClass({
   start () {
@@ -26,7 +27,7 @@ const Recorder = React.createClass({
                               navigator.webkitGetUserMedia)
 
     if (navigator.getUserMedia && window.MediaRecorder) {
-      const constraints = {audio: true}
+      const { constraints } = this.props;
       this.chunks = []
       const { blobOpts, onStop, onError, mediaOpts, onPause, onResume, onStart, gotStream } = this.props
 
@@ -93,7 +94,12 @@ const Recorder = React.createClass({
     onUnmount: PropTypes.func,
     gotStream: PropTypes.func,
     blobOpts: PropTypes.object,
-    mediaOpts: PropTypes.object
+    mediaOpts: PropTypes.object,
+    constraints: PropTypes.object
+  },
+
+  defaultProps: {
+    constraints: {audio: true}
   }
 })
 
